@@ -6,7 +6,7 @@ from tinymce import models as tinymce_models
 from django.contrib.auth.models import User
 from django.conf import settings
 
-# Create your models here.
+
 class Category(models.Model):
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=255)
@@ -30,7 +30,6 @@ class Post(models.Model):
     ]
     title = models.CharField(max_length=120)
     slug = models.CharField(max_length=60, unique=True, blank=True)
-    # content = models.TextField()
     content = tinymce_models.HTMLField()
     status = models.CharField(max_length=1, choices=statuses)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)

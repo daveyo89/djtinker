@@ -44,6 +44,33 @@
 
 </div>
 
+<div id="wrapper">
+    <div id="logo" class="container">
+        <h1><a href="#">Anarchia</a></h1>
+        <p>"A reflective, contented mind is the best possession."</p>
+    </div>
+    <div id="page" class="container">
+    <div id="menu-wrapper">
+        <div id="menu" class="container">
+            <div class="category-buttons">
+                <ul>
+                    <li>
+                        <a href="{% url 'index' %}">
+                            <button>All</button>
+                        </a>
+                    </li>
+                    {% for category in categories %}
+                        <li><a href="{% url 'category' category.slug %}">
+                            <button>{{ category.name }}</button>
+                        </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
 {% block content %}
 {% endblock %}
 
