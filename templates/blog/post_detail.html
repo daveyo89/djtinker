@@ -6,10 +6,9 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,400,400i,500i,600,900&display=swap"
           rel="stylesheet">
 {% endblock %}
-
 {% block content %}
-    <div id="article">
 
+    <div id="article">
         <div class="blog-meta">
             <h1>{{ post.title }}</h1>
             <p class="author"> {{ post.author.get_full_name }} <span class="date"> | {{ post.date }}</span></p>
@@ -35,5 +34,5 @@
         <div class="tag-container">
             <button>{{ post.category.name }}</button>
         </div>
-    </div>
+    </div></div>
 {% endblock %}

@@ -197,7 +197,7 @@ body {
     /* display: inline-table; */
     background-color: white;
     width: 312px;
-    height: 402px;
+    height: 420px;
     border: 1px solid rgba(0, 168, 255, .3);
     border-radius: 5px;
     box-shadow: 0 5px 20px 0 rgba(0, 0, 0, .1);
@@ -353,7 +353,7 @@ a:hover {
 }
 
 #logo h1 {
-    padding: 50px 0px 0px 0px;
+    padding: 50px 10px 10px 10px;
     letter-spacing: -6px;
     font-size: 100px;
 }

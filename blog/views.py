@@ -35,7 +35,7 @@ class CategoryView(ListView):
 
     def get_queryset(self):
         category = Category.objects.get(slug=self.request.resolver_match.kwargs.get('slug'))
-        queryset = Post.objects.filter(category=category)
+        queryset = Post.objects.filter(category=category, status="P")
         return queryset
 
 
@@ -63,6 +63,10 @@ class PostDetailView(DetailView):
     template_name = "blog/post_detail.html"
     queryset = Post.objects.filter(status="P")
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context['categories'] = Category.objects.all()
+        return context
 
 class PostCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     login_url = "/accounts/login"
