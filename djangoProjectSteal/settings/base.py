@@ -18,8 +18,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
-
-
+if os.environ.get('DJANGO_DEVELOPMENT'):
+    from .dev import *
+else:
+    from .prod import *
 
 # Application definition
 
@@ -130,7 +132,3 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 TINYMCE_JS_URL = os.path.join(MEDIA_URL, "tinymce/js/tinymce/tinymce.min.js")
 TINYMCE_JS_ROOT = os.path.join(MEDIA_ROOT, "tinymce")
 
-if os.environ.get('DJANGO_DEVELOPMENT'):
-    from .dev import *
-else:
-    from .prod import *
