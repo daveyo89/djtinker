@@ -5,3 +5,4 @@ djangoProjectSteal/__pycache__
 /staticfiles/
 /docker-compose.yml
 /Dockerfile
+/db.sqlite3
