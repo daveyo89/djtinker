@@ -120,11 +120,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
 # Media files
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = '/static/media'
+MEDIA_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # Login/Logout Redirect urls
 LOGIN_REDIRECT_URL = '/blogs'
