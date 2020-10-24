@@ -1,3 +1,7 @@
 .idea
 **/__pycache__/**
+djangoProjectSteal/__pycache__
 /venv/
+/staticfiles/
+/docker-compose.yml
+/Dockerfile
