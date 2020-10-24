@@ -18,10 +18,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
-if os.environ.get('DJANGO_DEVELOPMENT'):
-    from .dev import *
-else:
+if os.environ.get('DJANGO_PROD'):
     from .prod import *
+else:
+    from .dev import *
+
 
 # Application definition
 
