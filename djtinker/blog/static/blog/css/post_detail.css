@@ -13,9 +13,8 @@
     float: left;
     display: inline-block;
     margin:0 5px 0 0;
-    overflow: auto;
-    width: 10%;
-    height: auto;
+    width: 140px;
+    height: 140px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }

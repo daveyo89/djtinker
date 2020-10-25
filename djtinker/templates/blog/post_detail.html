@@ -18,21 +18,16 @@
         <div class="blog-content">
             {{ post.content|safe }}
         </div>
-
-
         <hr>
-{#        <div class="author-details">#}
-{#            <div id="author-pic">#}
-{#                <img src="{{ post.author.profile_image.url }}" alt=""/>#}
-{#            </div>#}
-{#            <div class="author-info">#}
-{#                <a href="{% url 'profile-view' post.author.slug %}"><p#}
-{#                        class="author-name">{{ post.author.get_full_name }}</p></a>#}
-{#                <p class="author-bio">{{ post.author.bio }}</p>#}
-{#            </div>#}
-{#        </div>#}
-        <div class="tag-container">
-            <button>{{ post.category.name }}</button>
+        <div id="card-holder">
+            {% for photo in photos %}
+                <div class="image-card">
+                    <a class="card-link" href="{% url 'photo-detail' photo.pk %}">
+                        <img class="image" src="{{ photo.images.url }}" alt=""/>
+                    </a>
+                </div>
+            {% endfor %}
         </div>
-    </div></div>
+    </div>
+
 {% endblock %}

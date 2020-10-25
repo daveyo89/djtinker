@@ -1,10 +1,9 @@
 from bs4 import BeautifulSoup
+from django.conf import settings
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
 from tinymce import models as tinymce_models
-from django.contrib.auth.models import User
-from django.conf import settings
 
 
 class Category(models.Model):
@@ -51,3 +50,8 @@ class Post(models.Model):
         soup = BeautifulSoup(self.content, features="html.parser")
         text = soup.get_text()
         return text
+
+
+class PostImage(models.Model):
+    post = models.ForeignKey(Post, default=None, on_delete=models.CASCADE)
+    images = models.FileField(upload_to='blog/post')

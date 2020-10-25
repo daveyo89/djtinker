@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 # from django.views import View
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
-from blog.models import Category, Post
+from blog.models import Category, Post, PostImage
 
 
 # Create your views here.
@@ -57,5 +57,21 @@ class PostDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
+        post = self.get_object()
         context['categories'] = Category.objects.all()
+        context['photos'] = PostImage.objects.filter(post=post)
         return context
+
+
+class PhotoDetailView(DetailView):
+    model = PostImage
+    context_object_name = "photo"
+    template_name = "blog/photo_detail.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        photo = self.get_object()
+
+        context["photo"] = photo
+        return context
+
