@@ -5,8 +5,9 @@
 
 <head>
     <meta charset="utf-8">
-    <title>tHeAntichrist</title>
+    <title>MorgenrotZeit</title>
     <link href="{% static 'blog/css/base.css' %}" rel="stylesheet" type="text/css">
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}"/>
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,400,400i,600,900&display=swap" rel="stylesheet">
     {% block extra_head %}
     {% endblock %}
@@ -15,7 +16,7 @@
 <div id="top-bar">
     <div class="logo-bar">
         <div class="logo">
-            <a href="{% url 'index' %}">Dave Yo</a>
+            <a href="{% url 'index' %}">Morgenstern</a>
         </div>
         <p class="logo">Think space</p>
     </div>
@@ -32,14 +33,7 @@
     </form>
 
     <div id="menu-items-container">
-{#        {% if request.user.is_authenticated %}#}
-            <p class="menu-item">Welcome</p>
-{#        {% else %}#}
-{#            <a href="{% url 'login' %}" class="menu-item">Login</a>#}
-{#            <a href="{% url 'signup' %}">#}
-{#                <button id="signup-btn">Signup</button>#}
-{#            </a>#}
-{#        {% endif %}#}
+        <p class="menu-item">Welcome</p>
     </div>
 
 </div>
@@ -50,34 +44,34 @@
         <p>"A reflective, contented mind is the best possession."</p>
     </div>
     <div id="page" class="container">
-    <div id="menu-wrapper">
-        <div id="menu" class="container">
-            <div class="category-buttons">
-                <ul>
-                    <li>
-                        <a href="{% url 'index' %}">
-                            <button>All</button>
-                        </a>
-                    </li>
-                    {% for category in categories %}
-                        <li><a href="{% url 'category' category.slug %}">
-                            <button>{{ category.name }}</button>
-                        </a>
+        <div id="menu-wrapper">
+            <div id="menu" class="container">
+                <div class="category-buttons">
+                    <ul>
+                        <li>
+                            <a href="{% url 'index' %}">
+                                <button>All</button>
+                            </a>
                         </li>
-                    {% endfor %}
-                </ul>
+                        {% for category in categories %}
+                            <li><a href="{% url 'category' category.slug %}">
+                                <button>{{ category.name }}</button>
+                            </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
             </div>
-
         </div>
-    </div>
 
-{% block content %}
-{% endblock %}
+        {% block content %}
+        {% endblock %}
 
-<div id="bottom-bar">
-    <div id="footer">
-        <p>© 2020 Morgenstern Bros. All rights reserved.</p>
-    </div>
-</div>
+        <div id="bottom-bar">
+            <div id="footer">
+                <p>© 2020 Morgenstern Bros. All rights reserved.</p>
+            </div>
+        </div>
 </body>
 </html>

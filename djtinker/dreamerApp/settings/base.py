@@ -14,11 +14,9 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
-ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 
 if os.environ.get('DJANGO_PROD'):
     from .prod import *
