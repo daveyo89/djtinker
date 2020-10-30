@@ -1,79 +1,60 @@
 <!DOCTYPE HTML>
 <html>
 {% load static %}
-
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
 
 <head>
     <meta charset="utf-8">
     <title>MorgenrotZeit</title>
-    <link href="{% static 'blog/css/base.css' %}" rel="stylesheet" type="text/css">
     <link rel="shortcut icon" href="{% static 'favicon.ico' %}"/>
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,400,400i,600,900&display=swap" rel="stylesheet">
     {% block extra_head %}
     {% endblock %}
 </head>
 <body>
-<div id="top-bar">
-    <div class="logo-bar">
-        <div class="logo">
-            <a href="{% url 'index' %}">Morgenstern</a>
-        </div>
-        <p class="logo">Think space</p>
+
+<nav class="navbar navbar-expand-md navbar-dark sticky-top bg-dark">
+    <a class="navbar-brand" href="">Morgenrot.hu</a>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'blog' %}">Blog</a>
+            </li>
+        </ul>
+        <form method="GET" action="{% url 'search' %}" class="form-inline my-2 my-lg-0">
+            {% csrf_token %}
+            <input name="query" class="form-control mr-sm-2" type="text" placeholder="Search"
+                   aria-label="Search">
+            {% buttons submit='Go' %}{% endbuttons %}
+        </form>
     </div>
+</nav>
+<main role="main">
+    <div class="container">
+        <div class="nav-scroller py-1 mb-2">
 
-    <!-- Search Bar -->
-    <form method="GET" action="{% url 'search' %}">
-        {% csrf_token %}
-        <div class="search">
-            <input type="text" name="query" class="searchTerm" placeholder="What are you looking for?">
-            <button type="submit" class="searchButton">
-                <i class="fa fa-search"></i>
-            </button>
         </div>
-    </form>
+        <hr>
 
-    <div id="menu-items-container">
-        <p class="menu-item">Welcome</p>
-    </div>
-
-</div>
-
-<div id="wrapper">
-    <div id="logo" class="container">
-        <h1><a href="#">anarchy</a></h1>
-        <p>"A reflective, contented mind is the best possession."</p>
-    </div>
-    <div id="page" class="container">
-        <div id="menu-wrapper">
-            <div id="menu" class="container">
-                <div class="category-buttons">
-                    <ul>
-                        <li>
-                            <a href="{% url 'index' %}">
-                                <button>All</button>
-                            </a>
-                        </li>
-                        {% for category in categories %}
-                            <li><a href="{% url 'category' category.slug %}">
-                                <button>{{ category.name }}</button>
-                            </a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-
-            </div>
-        </div>
 
         {% block content %}
         {% endblock %}
-
-        <div id="bottom-bar">
-            <div id="footer">
-                <p>© 2020 Morgenstern Bros. All rights reserved.</p>
-            </div>
-        </div>
     </div>
+</main>
+
+<hr>
+
+{% include 'blog/footer.html' %}
+
+
 </div>
 </body>
+
+
 </html>

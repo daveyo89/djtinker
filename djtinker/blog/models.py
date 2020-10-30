@@ -55,3 +55,21 @@ class Post(models.Model):
 class PostImage(models.Model):
     post = models.ForeignKey(Post, default=None, on_delete=models.CASCADE)
     images = models.FileField(upload_to='blog/post')
+
+
+class Introduction(models.Model):
+    statuses = [
+        ('A', 'Active'),
+        ('I', 'In Active')
+    ]
+    title = models.CharField(max_length=120)
+    message = tinymce_models.HTMLField()
+    status = models.CharField(max_length=1, choices=statuses, default='I')
+
+    def __str__(self):
+        return self.title
+
+    def html_to_text(self, *args, **kwargs):
+        soup = BeautifulSoup(self.message, features="html.parser")
+        text = " ".join(soup.find_all(text=True))
+        return text

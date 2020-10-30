@@ -1,4 +1,4 @@
-from blog.models import Category, Post, PostImage
+from blog.models import Category, Post, PostImage, Introduction
 from django.contrib import admin
 
 
@@ -21,4 +21,5 @@ class PostImageAdmin(admin.ModelAdmin):
 
 # Register your models here.
 admin.site.register(Category)
+admin.site.register(Introduction)
 # admin.site.register(Post)

@@ -1,0 +1,59 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% load bootstrap4 %}
+{% bootstrap_pagination page_obj %}
+{% block extra_head %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="jumbotron">
+    <hr>
+        <div class="nav-scroller py-1 mb-2">
+            <nav class="nav d-flex justify-content-center">
+                <a class="p-2 text-muted" href="{% url 'blog' %}">
+                    All
+                </a>
+                {% for category in categories %}
+                    <a class="p-2 text-muted" href="{% url 'category' category.slug %}">
+                        {{ category.name }}
+                    </a>
+                {% endfor %}
+            </nav>
+        </div>
+        <hr>
+
+        <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
+            <div class="col-md-6 px-0">
+                <h3 class="display-4 font-italic">{{ current_category.name|default:"All Posts" }}</h3>
+                <p class="lead my-3">{{ current_category.description|default:"" }}</p>
+            </div>
+        </div>
+        {% if is_paginated %}
+            {% bootstrap_pagination posts url="/?page=" size="large" %}
+        {% endif %}
+        <div class="row mb-2">
+            {% for post in posts %}
+                <div class="col-md-6 d-flex align-items-stretch">
+                    <div class="card  flex-md-row mb-4 box-shadow h-md-250">
+                        <div class="card-body d-flex flex-column align-items-stretch">
+                            <strong class="d-inline-block mb-2 text-primary">{{ post.author.get_full_name }}</strong>
+                            <h3 class="mb-0">
+                                <a class="text-dark" href="#">{{ post.title|truncatechars:20 }}</a>
+                            </h3>
+                            <div class="mb-1 text-muted">{{ post.date }}</div>
+                            <p class="card-text mb-auto">{{ post.html_to_text|truncatechars:130 }}</p>
+                            <a href="{% url 'post-detail' post.slug %}">Continue reading</a>
+                        </div>
+                        <img style="width: 200px; height: 220px;"
+                             class="card-img-right flex-auto d-none d-md-block " src="{{ post.image.url }}"
+                             alt="Card image cap">
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+
+{% endblock %}

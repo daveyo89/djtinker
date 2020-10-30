@@ -1,12 +1,26 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
 # from django.views import View
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-
-from blog.models import Category, Post, PostImage
+from django.views.generic import ListView, DetailView, DateDetailView,TemplateView
+from django.core.paginator import InvalidPage, Paginator, EmptyPage, PageNotAnInteger
+from blog.models import Category, Post, PostImage, Introduction
 
 
 # Create your views here.
+class Home(ListView):
+    model = Introduction
+    template_name = 'blog/index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context["intro"] = Introduction.objects.filter(status="A")
+        if context["intro"]:
+            context['message'] = context['intro'][0].html_to_text()
+
+        return context
+
+
+
 class SearchView(ListView):
     model = Post
     context_object_name = "posts"
@@ -23,12 +37,14 @@ class SearchView(ListView):
 class CategoryView(ListView):
     model = Post
     context_object_name = "posts"
-    template_name = "blog/category.html"
+    template_name = "blog/blog.html"
     queryset = Post.objects.filter(status="P")
 
     def get_context_data(self):
         context = super().get_context_data()
+        category = Category.objects.get(slug=self.request.resolver_match.kwargs.get('slug'))
         context['categories'] = Category.objects.all()
+        context['current_category'] = category
         return context
 
     def get_queryset(self):
@@ -40,12 +56,25 @@ class CategoryView(ListView):
 class PostListView(ListView):
     model = Post
     context_object_name = "posts"
-    template_name = "blog/index.html"
+    template_name = "blog/blog.html"
+    paginate_by = 6
     queryset = Post.objects.filter(status="P")
 
     def get_context_data(self):
         context = super().get_context_data()
+
         context['categories'] = Category.objects.all()
+        paginator = Paginator(self.queryset, self.paginate_by)
+        page = self.request.GET.get('page')
+
+        try:
+            posts = paginator.page(page)
+        except PageNotAnInteger:
+            posts = paginator.page(1)
+        except EmptyPage:
+            posts = paginator.page(paginator.num_pages)
+
+        context['posts'] = posts
         return context
 
 

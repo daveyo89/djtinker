@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "bootstrap4",
     'blog',
     'tinymce',
 ]
@@ -133,3 +134,10 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 TINYMCE_JS_URL = os.path.join(MEDIA_URL, "tinymce/js/tinymce/tinymce.min.js")
 TINYMCE_JS_ROOT = os.path.join(MEDIA_ROOT, "tinymce")
+
+BOOTSTRAP4 = {
+    "error_css_class": "bootstrap4-error",
+    "required_css_class": "bootstrap4-required",
+    "javascript_in_head": True,
+    "include_jquery": True,
+}
