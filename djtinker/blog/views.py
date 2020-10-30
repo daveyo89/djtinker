@@ -20,7 +20,6 @@ class Home(ListView):
         return context
 
 
-
 class SearchView(ListView):
     model = Post
     context_object_name = "posts"
