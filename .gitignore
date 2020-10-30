@@ -8,3 +8,4 @@ __pycache
 /startup_prod.cmd
 /djtinker/media/post/*
 .idea
+/djtinker/media/blog/post/

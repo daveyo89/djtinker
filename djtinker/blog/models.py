@@ -1,10 +1,9 @@
 from bs4 import BeautifulSoup
+from django.conf import settings
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
 from tinymce import models as tinymce_models
-from django.contrib.auth.models import User
-from django.conf import settings
 
 
 class Category(models.Model):
@@ -50,4 +49,27 @@ class Post(models.Model):
     def html_to_text(self, *args, **kwargs):
         soup = BeautifulSoup(self.content, features="html.parser")
         text = soup.get_text()
+        return text
+
+
+class PostImage(models.Model):
+    post = models.ForeignKey(Post, default=None, on_delete=models.CASCADE)
+    images = models.FileField(upload_to='blog/post')
+
+
+class Introduction(models.Model):
+    statuses = [
+        ('A', 'Active'),
+        ('I', 'In Active')
+    ]
+    title = models.CharField(max_length=120)
+    message = tinymce_models.HTMLField()
+    status = models.CharField(max_length=1, choices=statuses, default='I')
+
+    def __str__(self):
+        return self.title
+
+    def html_to_text(self, *args, **kwargs):
+        soup = BeautifulSoup(self.message, features="html.parser")
+        text = " ".join(soup.find_all(text=True))
         return text

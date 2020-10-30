@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html>
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <title>MorgenrotZeit</title>
+    <link href="{% static 'blog/css/base.css' %}" rel="stylesheet" type="text/css">
+</head>
+
+{% block content %}
+    <div id="page" class="container">
+        <img class="" src="{{ photo.images.url }}" alt=""/>
+    </div>
+{% endblock %}
