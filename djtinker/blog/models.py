@@ -1,10 +1,9 @@
 from bs4 import BeautifulSoup
-from django.conf import settings
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
 from tinymce import models as tinymce_models
-
+from django.contrib.auth.models import User
 
 class Category(models.Model):
     name = models.CharField(max_length=50)
@@ -32,7 +31,7 @@ class Post(models.Model):
     content = tinymce_models.HTMLField()
     status = models.CharField(max_length=1, choices=statuses)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, default=1, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='blog/post', default="post-default.jpg", blank=True)
     date = models.DateField(auto_now=True)
 
@@ -55,6 +54,7 @@ class Post(models.Model):
 class PostImage(models.Model):
     post = models.ForeignKey(Post, default=None, on_delete=models.CASCADE)
     images = models.FileField(upload_to='blog/post')
+    description = models.CharField(max_length=120, default='', blank=True)
 
 
 class Introduction(models.Model):
