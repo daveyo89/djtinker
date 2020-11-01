@@ -1,0 +1,96 @@
+.row:after {
+    content: "";
+}
+
+.modal {
+    display: none;
+    top: 5%;
+    left: 10%;
+    position: fixed;
+    width: 80%;
+    height: 90%;
+    overflow: auto;
+    background-color: black;
+
+}
+.card-text{
+    max-height: 40px;
+    overflow:hidden;
+    white-space: nowrap;
+}
+.close {
+    position: absolute;
+    color: whitesmoke;
+    top: 50px;
+    right: 50px;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #999;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+.prev,
+.next {
+    cursor: pointer;
+    padding-right: 20px;
+    padding-left: 20px;
+    top: 50%;
+    width: auto;
+    margin-top: -50px;
+    font-weight: bold;
+    font-size: 20px;
+    transition: 0.6s ease;
+    border-radius: 3px 3px 3px 3px;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.prev:hover,
+.next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.numbertext {
+    color: whitesmoke;
+    font-size: 18px;
+}
+
+.caption-container {
+    background-color: black;
+    color: white;
+}
+
+.demo {
+    opacity: 0.6;
+}
+
+.active,
+.demo:hover {
+    opacity: 1;
+}
+
+img.hover-shadow {
+    transition: 0.3s;
+}
+
+.hover-shadow:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+div.mini-photos {
+    display: table;
+    table-layout: fixed;
+}
+
+div.mini-photos div {
+    display: table-cell;
+}
