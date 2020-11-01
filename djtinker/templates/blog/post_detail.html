@@ -2,10 +2,12 @@
 {% load static %}
 {% load bootstrap4 %}
 {% block extra_head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/css/slideshow.css' %}">
+    <script src="{% static 'blog/js/slideshow.js' %}"></script>
+
 {% endblock %}
 
 {% block content %}
-
     <main role="main" class="container">
         <div class="jumbotron">
             <div class="row">
@@ -44,27 +46,8 @@
             </div><!-- /.row -->
         </div><!-- /.blog-main -->
     </main><!-- /.container -->
-    {% if photos|length > 0 %}
-    <div class="album py-5 bg-light">
-        <div class="container">
-            <div class="row">
-                {% for photo in photos %}
 
-                    <div class="col-md-4 d-flex">
-                        <div class="card mb-4 box-shadow">
-                            <a class="card-link" href="{% url 'photo-detail' photo.pk %}">
-                            <img class="card-img-top" style="height: 225px; width: 100%; display: block;" src="{{ photo.images.url }}" alt=""/>
-                            </a>
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <p class="card-text">{{  photo.description }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
+    {% if photos|length > 0 %}
+        {% include 'blog/slideshow.html' %}
     {% endif %}
 {% endblock %}

@@ -1,0 +1,70 @@
+<main class="container">
+<div class="jumbotron">
+<div class="album py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            {% for photo in photos %}
+                <div class="col-md-4 d-flex">
+                    <div class="card mb-4 box-shadow">
+                        <a class="card-link">
+                            <img class="card-img-top hover-shadow cursor"
+                                 style="height: 225px; width: 100%; display: block;"
+                                 src="{{ photo.images.url }}" onclick="openModal();currentSlide(1)" alt=""
+                            />
+                        </a>
+                                <p class="card-text">{{ photo.description }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<div id="myModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-content">
+        <div class="album  bg-light">
+            <div class="container">
+                <div class="row">
+<span class="close cursor" data-dismiss="modal"
+      onclick="closeModal()">&times;</span>
+                    {% for photo in photos %}
+                        <div class="mySlides text-white rounded bg-dark text-center"
+                             style="display: inline-block">
+                            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+
+                            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                            <div class="numbertext">{{ forloop.counter }} / {{ photos|length }}</div>
+
+                            <img class="" src="{{ photo.images.url }}" style="max-height:480px;  max-width:100%"
+                                 alt="">
+                            <p class="card-text">{{ photo.description }}</p>
+
+                        </div>
+
+                    {% endfor %}
+
+                    <div class="caption-container">
+                        <p id="caption"></p>
+                    </div>
+                    <div class="mini-photos" >
+
+                    {% for photo in photos %}
+                            <div class="card mb-4 box-shadow" style="width: 80px">
+                                <a class="card-link">
+                                    <img class="card-img-top hover-shadow demo cursor"
+                                         src="{{ photo.images.url }}"
+                                         style="height: 100px; display: block;"
+                                         onclick="currentSlide({{ forloop.counter }})" alt="">
+                                </a>
+
+                            </div>
+
+                    {% endfor %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</main>

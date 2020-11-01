@@ -5,6 +5,7 @@ from django.utils.text import slugify
 from tinymce import models as tinymce_models
 from django.contrib.auth.models import User
 
+
 class Category(models.Model):
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=255)
@@ -20,6 +21,8 @@ class Category(models.Model):
     def get_absolute_url(self, *args, **kwargs):
         return reverse('category', kwargs={'slug': self.slug})
 
+    class Meta:
+        verbose_name_plural = "Categories"
 
 class Post(models.Model):
     statuses = [
@@ -55,6 +58,9 @@ class PostImage(models.Model):
     post = models.ForeignKey(Post, default=None, on_delete=models.CASCADE)
     images = models.FileField(upload_to='blog/post')
     description = models.CharField(max_length=120, default='', blank=True)
+
+    def __str__(self):
+        return self.post.title + self.images.name
 
 
 class Introduction(models.Model):
