@@ -28,18 +28,20 @@
                          id="cover-image"/>
                     <hr>
                     <div class="p-3 mb-3 bg-light rounded">
-                        <h4 class="font-italic">About</h4>
-                        <p class="mb-0">Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur
-                            purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
-                    </div>
+                        <h4 class="font-italic">Read More</h4>
+                        <p class="mb-0">
+                            <a href="{{ post.get_previous_by_date.slug }}" class="btn btn-secondary btn-sm
+                                    {% if post.get_previous_by_date.slug != "" and post.get_previous_by_date.category == post.category %} {{ 'active' }} {% else %} {{ 'disabled' }}{% endif %}"
+                               role="button" aria-pressed="true">Previous</a>
+                            <a href="{{ post.get_next_by_date.slug }}"
+                               class="btn btn-primary btn-sm {% if post.get_next_by_date.slug != "" and post.get_next_by_date.category == post.category %} {{ 'active' }} {% else %} {{ 'disabled' }}{% endif %}"
+                               role="button" aria-pressed="true">Next</a>
+                        </p>
 
-                    <div class="p-3">
-                        <h4 class="font-italic">Elsewhere</h4>
-                        <ol class="list-unstyled">
-                            <li><a href="#">GitHub</a></li>
-                            <li><a href="#">Twitter</a></li>
-                            <li><a href="#">Facebook</a></li>
-                        </ol>
+                    </div>
+                    <div class="p-3 mb-3 bg-light rounded">
+                        <a href="{% url 'category' post.category.slug %}" class="btn btn-primary btn-block" role="button" aria-pressed="true">Back to {{ post.category }}</a>
+                        <a href="{% url 'blog' %}" class="btn btn-secondary btn-block" role="button" aria-pressed="true">Back to All</a>
                     </div>
                 </aside><!-- /.blog-sidebar -->
 

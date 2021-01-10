@@ -53,6 +53,8 @@ class Post(models.Model):
         text = soup.get_text()
         return text
 
+    class Meta:
+        ordering = ["-date"]
 
 class PostImage(models.Model):
     post = models.ForeignKey(Post, default=None, on_delete=models.CASCADE)
