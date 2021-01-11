@@ -10,8 +10,8 @@
             <h1>Search results...</h1>
             <div class="row">
                 {% if posts|length < 1 %}
-                    <div class="col-md-4 d-flex">
-                        <div class="card mb-4 box-shadow">
+                    <aside class="col-md-4 d-flex">
+                        <div class="card md-4 card-body box-shadow">
                             <p>Your search - <b>{{ request.GET.query }}</b> ... - did not match any documents.</p>
                             <p>Suggestions:</p>
                             <li>Make sure that all words are spelled correctly.</li>
@@ -19,13 +19,14 @@
                             <li>Try more general keywords.</li>
                             <li>Try fewer keywords.</li>
                         </div>
-                    </div>
+                    </aside>
                 {% else %}
-                    {% for post in posts %}
-                        <div class="col-md-4 d-flex">
-                            <div class="card mb-4 box-shadow">
+                    <aside class="col-md-4 d-flex">
+                        {% for post in posts %}
+                            <div class="col-md-8 blog-main">
                                 <a class="card-link" href="{% url 'post-detail' post.slug %}">
-                                    <img class="card-img-top" style="height: 225px; width: 100%; display: block;"
+                                    <img class="img-fluid img-thumbnail"
+                                         style="height: 220px; width: 100%; display: block;"
                                          src="{{ post.image.url }}" alt=""/>
                                 </a>
                                 <div class="card-body">
@@ -37,9 +38,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                    {% endfor %}
+                        {% endfor %}
+                    </aside>
                 {% endif %}
             </div>
         </div>

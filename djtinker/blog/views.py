@@ -28,8 +28,10 @@ class SearchView(ListView):
     def get_queryset(self):
         query = self.request.GET['query']
         title_queryset = Post.objects.filter(status="P", title__icontains=query)
+        author_queryset = Post.objects.filter(status="P", author__username__icontains=query)
+        date_queryset = Post.objects.filter(status="P", date__icontains=query)
         content_queryset = Post.objects.filter(status="P", content__icontains=query)
-        queryset = title_queryset.union(content_queryset)
+        queryset = title_queryset.union(content_queryset).union(author_queryset).union(date_queryset)
         return queryset
 
 
@@ -37,6 +39,7 @@ class CategoryView(ListView):
     model = Post
     context_object_name = "posts"
     template_name = "blog/blog.html"
+
     queryset = Post.objects.filter(status="P")
 
     def get_context_data(self):
